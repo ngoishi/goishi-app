@@ -1,3 +1,4 @@
+library(shiny)
 # Global variables can go here
 n <- 200
 
