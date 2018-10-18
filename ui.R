@@ -1,32 +1,24 @@
-library(shinydashboard)
-library(ggplot2)
-library(leaflet)
+library(shiny)
 
-header <- dashboardHeader(
-  title = "コロプレス図"
-)
+# アプリケーションの UI 定義。ヒストグラムを描く
+shinyUI(fluidPage(
 
+  # アプリケーションタイトル
+  titlePanel("Hello Shiny!"),
 
-body <- dashboardBody(
-  fluidRow(
-    column(width = 9,
-           box(width = NULL, solidHeader = TRUE,
-               leafletOutput("mymap", height = 500) #leaflet
-           ),
-           box(width = NULL,
-               plotOutput("graph", height = 300) #グラフ
-           )
+  # サイドバー。階級数(bin)のためのスライダー
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins",
+                  "Number of bins:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
     ),
-    column(width = 3,
-           box(width = NULL, status = "warning",
-               selectInput('data', 'データを選択', choices = col_choice, width = 600)
-               )
-           )
+
+    # 生成された分布のプロットを表示する
+    mainPanel(
+      plotOutput("distPlot")
     )
   )
-
-dashboardPage(
-  header,
-  dashboardSidebar(disable = TRUE),
-  body
-)
+))
