@@ -1,20 +1,21 @@
 library(shiny)
 
-# サーバロジックの定義。ヒストグラムを描く
+# Define server logic required to draw a histogram
 shinyServer(function(input, output) {
 
-  # ヒストグラムを描くための式。
-  # この式は renderPlot にラップされている。つまり、
+  # Expression that generates a histogram. The expression is
+  # wrapped in a call to renderPlot to indicate that:
   #
-  #  1) これは "reactive" であり、入力が変更されると
-  #     自動的に再実行される
-  #  2) この出力タイプは plot である
+  #  1) It is "reactive" and therefore should be automatically
+  #     re-executed when inputs change
+  #  2) Its output type is a plot
 
   output$distPlot <- renderPlot({
     x    <- faithful[, 2]  # Old Faithful Geyser data
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
 
-    # 指定された階級数(bin)でヒストグラムを描く
+    # draw the histogram with the specified number of bins
     hist(x, breaks = bins, col = 'darkgray', border = 'white')
   })
+
 })
