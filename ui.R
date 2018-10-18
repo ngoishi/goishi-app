@@ -1,4 +1,5 @@
 library(markdown)
+library(DT)
 
 navbarPage("Navbar!",
   tabPanel("Plot",
