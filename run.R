@@ -1,2 +1,2 @@
 library(shiny)
-runApp('ngoishi/shiny')
+runApp("ngoishi/shiny")
