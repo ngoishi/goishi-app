@@ -1,5 +1,5 @@
 library(markdown)
-library(htmlwidgets)
+library(DT)
 
 navbarPage("Navbar!",
   tabPanel("Plot",
