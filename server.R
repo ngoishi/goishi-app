@@ -9,9 +9,11 @@ shinyServer(function(input, output) {
   #  1) これは "reactive" であり、入力が変更されると
   #     自動的に再実行される
   #  2) この出力タイプは plot である
+  
+  dat<-read.csv("dat.csv",header=FALSE)
 
   output$distPlot <- renderPlot({
-    x    <- faithful[, 2]  # Old Faithful Geyser data
+    x    <- dat[, 1]  # Old Faithful Geyser data
     bins <- seq(min(x), max(x), length.out = input$bins + 1)
 
     # 指定された階級数(bin)でヒストグラムを描く
