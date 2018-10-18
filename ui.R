@@ -4,7 +4,7 @@ library(shiny)
 shinyUI(fluidPage(
 
   # アプリケーションタイトル
-  titlePanel("Hello Shiny!"),
+  titlePanel("日本語が表示できるのか"),
 
   # サイドバー。階級数(bin)のためのスライダー
   sidebarLayout(
