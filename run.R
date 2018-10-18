@@ -1,2 +1,2 @@
-> library(shiny)
-> runApp("../shiny-dashboard")
+library(shiny)
+runApp("../shiny-dashboard")
