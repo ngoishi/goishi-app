@@ -1,45 +1,32 @@
-library(markdown)
-library(DT)
+library(shinydashboard)
+library(ggplot2)
+library(leaflet)
 
-navbarPage("Navbar!",
-  tabPanel("Plot",
-    sidebarLayout(
-      sidebarPanel(
-        radioButtons("plotType", "Plot type",
-          c("Scatter"="p", "Line"="l")
-        )
-      ),
-      mainPanel(
-        plotOutput("plot")
-      )
-    )
-  ),
-  tabPanel("Summary",
-    verbatimTextOutput("summary")
-  ),
-  navbarMenu("More",
-    tabPanel("Table",
-      DT::dataTableOutput("table")
+header <- dashboardHeader(
+  title = "コロプレス図"
+)
+
+
+body <- dashboardBody(
+  fluidRow(
+    column(width = 9,
+           box(width = NULL, solidHeader = TRUE,
+               leafletOutput("mymap", height = 500) #leaflet
+           ),
+           box(width = NULL,
+               plotOutput("graph", height = 300) #グラフ
+           )
     ),
-    tabPanel("About",
-      fluidRow(
-        column(6,
-          includeMarkdown("about.md")
-        ),
-        column(3,
-          img(class="img-polaroid",
-            src=paste0("http://upload.wikimedia.org/",
-            "wikipedia/commons/9/92/",
-            "1919_Ford_Model_T_Highboy_Coupe.jpg")),
-          tags$small(
-            "Source: Photographed at the Bay State Antique ",
-            "Automobile Club's July 10, 2005 show at the ",
-            "Endicott Estate in Dedham, MA by ",
-            a(href="http://commons.wikimedia.org/wiki/User:Sfoskett",
-              "User:Sfoskett")
-          )
-        )
-      )
+    column(width = 3,
+           box(width = NULL, status = "warning",
+               selectInput('data', 'データを選択', choices = col_choice, width = 600)
+               )
+           )
     )
   )
+
+dashboardPage(
+  header,
+  dashboardSidebar(disable = TRUE),
+  body
 )
